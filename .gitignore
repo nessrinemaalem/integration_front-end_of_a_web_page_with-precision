@@ -1,2 +1,4 @@
-/node_modules
+node_modules/git add .gitignore
+git commit -m "Ajout de l'ignorance des fichiers node_modules"
+
 .DS_Store
