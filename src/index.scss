@@ -20,3 +20,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.match-card-board {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Deux colonnes de taille égale */
+  gap: 20px; /* Espace entre les colonnes */
+  height: 100vh; /* Hauteur totale de la vue */
+}
+
+.main, .secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
