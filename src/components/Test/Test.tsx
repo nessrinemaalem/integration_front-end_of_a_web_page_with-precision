@@ -1,6 +1,7 @@
-import React from 'react';
 import { AttendeeType } from '../../api/types';
 import './Test.scss';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const PlayerRow: React.FC<{ player: AttendeeType }> = ({ player }) => {
   return (
@@ -40,29 +41,33 @@ const PlayerTable: React.FC<{ players: AttendeeType[] }> = ({ players })=> {
 };
 
 export const Test: React.FC = () => {
-  const players: AttendeeType[] = [
-    { 
-      photo_url: '../photo/1.jpeg', 
-      first_name: 'John', 
-      last_name: 'Doe', 
-      email: 'john.doe@example.com', 
-      status: 'present' 
-    },
-    { 
-      photo_url: '../photo/2.jpeg', 
-      first_name: 'Jane', 
-      last_name: 'Smith', 
-      email: 'jane.smith@example.com', 
-      status: 'absent' 
-    },
-    { 
-      photo_url: '../photo/3.jpeg', 
-      first_name: 'Bob', 
-      last_name: 'Johnson', 
-      email: 'bob.johnson@example.com', 
-      status: 'present' 
-    },
-  ];
+  const [players, setPlayers] = React.useState<AttendeeType[] | null>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    axios.get('https://hr2v36jyr7.execute-api.eu-west-3.amazonaws.com/default/frontendInterview')
+      .then(response => {
+        setPlayers(response.data.attendees);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!players) {
+    return <div>No player data</div>;
+  }
 
   return (
     <div className="event-container">

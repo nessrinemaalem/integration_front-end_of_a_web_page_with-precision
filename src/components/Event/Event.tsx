@@ -1,11 +1,46 @@
 import "./Event.scss";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { EventDetailType } from "../../api/types";
 
 export const Event = () => {
-  return <div className="event-container">
-    <h1>Mardi 20 juin 2023</h1>
-    <h3>Match amical</h3>
-    <p>Début du match: 8h</p>
-    <p>Fin du match: 20h</p>
-    <p>FC Olympiens <span>resultat match</span> AS Fresnes</p>
-  </div>;
+  const [eventDetails, setEventDetails] = useState<EventDetailType | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    axios.get('https://hr2v36jyr7.execute-api.eu-west-3.amazonaws.com/default/frontendInterview')
+      .then(response => {
+        setEventDetails(response.data.event_detail);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!eventDetails) {
+    return <div>No event data</div>;
+  }
+
+  return (
+    <div className="event-container">
+      <h1>{eventDetails.date}</h1>
+      <h3>{eventDetails.type}</h3>
+      <p>Début du match: {eventDetails.start_at}</p>
+      <p>Fin du match: {eventDetails.end_at}</p>
+      <p>{eventDetails.left_team.name} <span>{eventDetails.left_team.score ?? 'N/A'}</span> vs {eventDetails.right_team.name} <span>{eventDetails.right_team.score ?? 'N/A'}</span></p>
+    </div>
+  );
 };
+
+export default Event;
