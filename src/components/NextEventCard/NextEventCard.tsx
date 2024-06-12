@@ -1,7 +1,7 @@
 import { LastNextEventType } from '../../api/types';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import './NextEventCard.scss';
 
 export const NextEventCard = () => {
 	const [eventDetails, setEventDetails] = useState<LastNextEventType | null>(null);
@@ -31,10 +31,10 @@ export const NextEventCard = () => {
 		return <div>No event data</div>;
 	}
 	return (
-		<div>
+		<div className="event-container next-event-card">
 			<p>Prochain Match</p>
-			<p>{eventDetails.left_team.name}</p><span>{eventDetails.left_team.score}</span>
-			<p>{eventDetails.right_team.name}</p><span>{eventDetails.right_team.score}</span>
+			<p>{eventDetails.left_team.name}  <span>{eventDetails.left_team.score}</span></p>
+			<p>{eventDetails.right_team.name}  <span>{eventDetails.right_team.score}</span></p>
 		</div>
 	);
 };

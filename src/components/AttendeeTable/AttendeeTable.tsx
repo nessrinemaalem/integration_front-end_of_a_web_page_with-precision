@@ -1,11 +1,11 @@
 import { AttendeeType } from '../../api/types';
-import './Test.scss';
+import './AttendeeTable.scss';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const PlayerRow: React.FC<{ player: AttendeeType }> = ({ player }) => {
   return (
-    <tr>
+    <tr className="player-row">
       <td><img src={player.photo_url} alt={`${player.first_name} ${player.last_name}`} /></td>
       <td>{player.last_name}</td>
       <td>{player.first_name}</td>
@@ -40,7 +40,7 @@ const PlayerTable: React.FC<{ players: AttendeeType[] }> = ({ players })=> {
   );
 };
 
-export const Test: React.FC = () => {
+export const AttendeeTable: React.FC = () => {
   const [players, setPlayers] = React.useState<AttendeeType[] | null>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -70,7 +70,7 @@ export const Test: React.FC = () => {
   }
 
   return (
-    <div className="event-container">
+    <div className="event-container player-attendee-card">
       <PlayerTable players={players} />
     </div>
   );

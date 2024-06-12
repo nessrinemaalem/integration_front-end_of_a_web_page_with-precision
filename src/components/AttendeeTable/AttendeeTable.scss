@@ -1,0 +1,27 @@
+@import '../../vars.scss';
+
+.player-attendee-card {
+	width: 828px;
+	height: 524px;
+	background-color: white;
+}
+
+.player-row img {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+}
+
+table {
+	width: 828px;
+	height: 524px;
+}
+
+table th {
+	background-color: $almost-grey;
+}
+
+th, td {
+	text-align: left;
+}
+

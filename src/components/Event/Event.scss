@@ -2,4 +2,21 @@
 
 .event-container {
   padding: $margin-large;
+  background-color: white;
+}
+
+.event-card {
+  width: 828px;
+  height: 187px;
+  text-align: center;
+}
+
+.event-banderole {
+  background-color: $blue-sporteasy;
+  color: white;
+  width: 100%;
+}
+
+.event-card span {
+  background-color: $almost-grey;
 }

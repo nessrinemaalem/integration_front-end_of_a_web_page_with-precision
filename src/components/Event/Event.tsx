@@ -33,12 +33,14 @@ export const Event = () => {
   }
 
   return (
-    <div className="event-container">
-      <h1>{eventDetails.date}</h1>
-      <h3>{eventDetails.type}</h3>
+    <div className="event-container event-card" >
+      <div className="event-banderole">
+        <p>{eventDetails.date}</p>
+        <p>{eventDetails.type}</p>
+      </div>
       <p>Début du match: {eventDetails.start_at}</p>
       <p>Fin du match: {eventDetails.end_at}</p>
-      <p>{eventDetails.left_team.name} <span>{eventDetails.left_team.score ?? 'N/A'}</span> vs {eventDetails.right_team.name} <span>{eventDetails.right_team.score ?? 'N/A'}</span></p>
+      <p>{eventDetails.left_team.name} <span>{eventDetails.left_team.score ?? 'N/A'} - {eventDetails.right_team.score ?? 'N/A'}</span> vs {eventDetails.right_team.name}</p>
     </div>
   );
 };

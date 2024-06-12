@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ProfileType } from '../../api/types';
+import './PlayerProfile.scss';
 
 export const PlayerProfile: React.FC = () => {
   const [player, setPlayer] = useState<ProfileType | null>(null);
@@ -32,7 +33,7 @@ export const PlayerProfile: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="event-container player-profile" >
       <img src={player.photo_url} alt={`${player.first_name} ${player.last_name}`} style={{ width: '100px', height: '100px' }} />
       <h1>{`${player.first_name} ${player.last_name}`}</h1>
       <p>{player.email}</p>
@@ -41,4 +42,3 @@ export const PlayerProfile: React.FC = () => {
   );
 };
 
-export default PlayerProfile;
